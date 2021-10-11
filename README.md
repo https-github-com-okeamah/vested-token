@@ -3,5 +3,5 @@
 Hardhat template for solidity projects with preconfigured Github Actions and Coveralls support.
 
 
-[![Build Status](https://github.com/zumzoom/solidity-template/workflows/CI/badge.svg)](https://github.com/zumzoom/solidity-template/actions)
-[![Coverage Status](https://coveralls.io/repos/github/ZumZoom/solidity-template/badge.svg?branch=master)](https://coveralls.io/github/ZumZoom/solidity-template?branch=master)
+[![Build Status](https://github.com/1inch/vested-token/workflows/CI/badge.svg)](https://github.com/1inch/vested-token/actions)
+[![Coverage Status](https://coveralls.io/repos/github/1inch/vested-token/badge.svg?branch=master)](https://coveralls.io/github/1inch/vested-token?branch=master)

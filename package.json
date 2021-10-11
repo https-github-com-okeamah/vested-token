@@ -1,10 +1,10 @@
 {
-  "name": "vested-1inch",
+  "name": "vested-token",
   "version": "0.0.1",
   "description": "",
   "repository": {
     "type": "git",
-    "url": "git@github.com:1inch/vested-1inch.git"
+    "url": "git@github.com:1inch/vested-token.git"
   },
   "license": "MIT",
   "dependencies": {
