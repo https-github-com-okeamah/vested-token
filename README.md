@@ -1,6 +1,6 @@
-# Solidity Template
+# VestedToken
 
-Hardhat template for solidity projects with preconfigured Github Actions and Coveralls support.
+Synthetic non-transferrable token contract that tracks balances of vested token receivers.
 
 
 [![Build Status](https://github.com/1inch/vested-token/workflows/CI/badge.svg)](https://github.com/1inch/vested-token/actions)
