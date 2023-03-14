@@ -1,6 +1,5 @@
-const hre = require('hardhat');
 const { expect } = require('chai');
-const { ether, expectEvent, constants } = require('@openzeppelin/test-helpers');
+const { ether } = require('@openzeppelin/test-helpers');
 
 const INCH_ADDR = '0x111111111117dC0aa78b770fA6A738034120C302';
 const V1INCH_ADDR = '0x03d1B1A56708FA298198DD5e23651a29B76a16d2';
