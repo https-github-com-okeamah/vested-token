@@ -22,4 +22,5 @@ module.exports = {
                 "jml[jl] VcTOcl jml",
         },
     },
+    skipFiles: ['interfaces'],
 }
