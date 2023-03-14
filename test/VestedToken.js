@@ -21,8 +21,8 @@ describe('VestedToken', async function () {
 
     it('should be ok', async function () {
         await this.VestedToken.registerVestings(vestings);
-        expect(await this.VestedToken.balanceOf('0x4942b20750163675DDf004476FFE46626652dfD0')).to.be.bignumber.equal(ether('75000000'));
-        expect(await this.VestedToken.balanceOf('0x4Dc06c025Cb97d6Dc4A17183187e28D297B83C7B')).to.be.bignumber.equal(ether('50000000'));
+        expect(await this.VestedToken.balanceOf('0x4942b20750163675DDf004476FFE46626652dfD0')).to.be.bignumber.equal(ether('18750000'));
+        expect(await this.VestedToken.balanceOf('0x4Dc06c025Cb97d6Dc4A17183187e28D297B83C7B')).to.be.bignumber.equal(ether('13926250'));
         expectEvent(
             await this.VestedToken.deregisterVestings(['0x32757Da4Bd73a35F05806Ee91CDB4B1746e63a45']),
             'VestingDeregistered',
@@ -31,7 +31,7 @@ describe('VestedToken', async function () {
                 receiver: '0x4Dc06c025Cb97d6Dc4A17183187e28D297B83C7B',
             },
         );
-        expect(await this.VestedToken.balanceOf('0x4Dc06c025Cb97d6Dc4A17183187e28D297B83C7B')).to.be.bignumber.equal(ether('44295000'));
+        expect(await this.VestedToken.balanceOf('0x4Dc06c025Cb97d6Dc4A17183187e28D297B83C7B')).to.be.bignumber.equal(ether('11073750'));
         await hre.network.provider.request({
             method: 'hardhat_impersonateAccount',
             params: ['0x4Dc06c025Cb97d6Dc4A17183187e28D297B83C7B'],
@@ -43,15 +43,15 @@ describe('VestedToken', async function () {
         });
         await hre.network.provider.request({
             method: 'evm_setNextBlockTimestamp',
-            params: [1638360000],
+            params: [1690000000],
         });
         await hre.network.provider.request({
             method: 'evm_mine',
         });
         const vesting = await IStepVesting.at('0x0ac6ff4dBdE9cEeDC6d4c08B14ceD9FF19A013aB');
-        expect(await this.VestedToken.balanceOf('0x4Dc06c025Cb97d6Dc4A17183187e28D297B83C7B')).to.be.bignumber.equal(ether('44295000'));
+        expect(await this.VestedToken.balanceOf('0x4Dc06c025Cb97d6Dc4A17183187e28D297B83C7B')).to.be.bignumber.equal(ether('11073750'));
         await vesting.claim({ from: '0x4Dc06c025Cb97d6Dc4A17183187e28D297B83C7B' });
-        expect(await this.VestedToken.balanceOf('0x4Dc06c025Cb97d6Dc4A17183187e28D297B83C7B')).to.be.bignumber.equal(ether('33221250'));
+        expect(await this.VestedToken.balanceOf('0x4Dc06c025Cb97d6Dc4A17183187e28D297B83C7B')).to.be.bignumber.equal('0');
         expectEvent(
             await this.VestedToken.updateBalances(['0x0ac6ff4dBdE9cEeDC6d4c08B14ceD9FF19A013aB']),
             'Transfer',
