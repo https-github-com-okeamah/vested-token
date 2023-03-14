@@ -14,8 +14,6 @@ contract VestedVotingPower is Ownable, VotingPowerCalculator {
 
     IVestedToken public immutable vestedToken;
     mapping (address => EnumerableSet.AddressSet) private _vestingsByReceiver;
-    EnumerableSet.AddressSet private _receivers;
-    mapping(address => uint256) private _vestingBalances;
 
     uint256 private constant _VOTING_POWER_DIVIDER = 20;
 
@@ -25,6 +23,10 @@ contract VestedVotingPower is Ownable, VotingPowerCalculator {
 
     function vestedTokenTransferOwnership(address newOwner) external onlyOwner {
         vestedToken.transferOwnership(newOwner);
+    }
+
+    function vestingsByReceiver(address receiver) external view returns (address[] memory) {
+        return _vestingsByReceiver[receiver].values();
     }
 
     function votingPowerOf(address account) external view returns (uint256 votingPower) {
