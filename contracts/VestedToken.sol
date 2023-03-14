@@ -1,15 +1,14 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.9;
-
-pragma abicoder v1;
+pragma solidity 0.8.19;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./interfaces/IStepVesting.sol";
+import "./interfaces/IVestedToken.sol";
 
-contract VestedToken is Ownable {
+contract VestedToken is IVestedToken, Ownable {
     using EnumerableSet for EnumerableSet.AddressSet;
 
     event Transfer(address indexed from, address indexed to, uint256 value);
@@ -23,6 +22,14 @@ contract VestedToken is Ownable {
 
     constructor(IERC20 _inchToken) {
         inchToken = _inchToken;
+    }
+
+    function owner() public view override(IVestedToken, Ownable) returns (address) {
+        return Ownable.owner();
+    }
+
+    function transferOwnership(address newOwner) public override(IVestedToken, Ownable) onlyOwner {
+        Ownable.transferOwnership(newOwner);
     }
 
     function name() external pure returns(string memory) {
