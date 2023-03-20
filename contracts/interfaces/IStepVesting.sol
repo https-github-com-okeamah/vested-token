@@ -11,4 +11,5 @@ interface IStepVesting {
     function stepDuration() external view returns (uint256);
     function stepAmount() external view returns (uint256);
     function numOfSteps() external view returns (uint256);
+    function claimed() external view returns (uint256);
 }

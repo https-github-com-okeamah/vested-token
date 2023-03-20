@@ -3,6 +3,7 @@
 pragma solidity 0.8.19;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/math/Math.sol";
 import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "./interfaces/IStepVesting.sol";
 import "./interfaces/ISt1inch.sol";
@@ -38,14 +39,16 @@ contract VestedVotingPower is Ownable, VotingPowerCalculator {
                 uint256 started = vesting.started();
                 uint256 cliffDuration = vesting.cliffDuration();
                 uint256 stepDuration = vesting.stepDuration();
-                if (block.timestamp < started + cliffDuration) {
-                    votingPower += _votingPowerAt(_balanceAt(vesting.cliffAmount() / _VOTING_POWER_DIVIDER, started + cliffDuration), block.timestamp);
-                }
+                uint256 cliffAmount = vesting.cliffAmount();
                 uint256 numOfSteps = vesting.numOfSteps();
+                uint256 stepAmount = vesting.stepAmount();
+                uint256 claimed = vesting.claimed();
+                if (claimed < cliffAmount) {
+                    votingPower += Math.min(cliffAmount, _votingPowerAt(_balanceAt(cliffAmount / _VOTING_POWER_DIVIDER, started + cliffDuration), block.timestamp));
+                }
                 for (uint256 j = 0; j < numOfSteps; j++) {
-                    uint256 stepUnlockTimestamp = started + cliffDuration + stepDuration * (j + 1);
-                    if (block.timestamp < stepUnlockTimestamp) {
-                        votingPower += _votingPowerAt(_balanceAt(vesting.stepAmount() / _VOTING_POWER_DIVIDER, stepUnlockTimestamp), block.timestamp);
+                    if (claimed < cliffAmount + stepAmount * (j + 1)) {
+                        votingPower += Math.min(stepAmount, _votingPowerAt(_balanceAt(stepAmount / _VOTING_POWER_DIVIDER, started + cliffDuration + stepDuration * (j + 1)), block.timestamp));
                     }
                 }
             }
