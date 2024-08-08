@@ -2,6 +2,7 @@ const networks = {
     hardhat: {
         forking: {
             url: process.env.MAINNET_RPC_URL,
+            blockNumber: 16822491,
         },
     },
 };
