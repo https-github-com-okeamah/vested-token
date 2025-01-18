@@ -1,0 +1,12 @@
+{
+  "token_address": "0x24E1A6814d05a583Aad62B1E1dE5D1A5E71E7CB0",
+  "owner": "DAVID OKEAMAH",
+  "vesting_schedule": [
+    {
+      "beneficiary": "0x97293ceab815896883e8200aef5a4581a70504b2",
+      "start_time": "2025-01-01T00:00:00Z",
+      "cliff_duration": 31536000,
+      "vesting_duration": 63072000
+    }
+  ]
+}
